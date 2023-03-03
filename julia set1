@@ -1,0 +1,27 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the Julia set function 
+def julia_set(x, y, c, n): 
+    z = complex(x,y) 
+    for i in range(n): 
+        if abs(z) > 2: 
+            return 0
+        z = z*z + c  
+    return 1
+
+ # Create a 512x512 array to store the values of the Julia set 
+julia_set_array = np.zeros((512,512)) 
+
+ # Set the parameters for the Julia set  
+c = complex(-0.8, 0.156) 
+n = 256
+
+ # Iterate over each element of the array and calculate its value  
+for x in range(512): 
+    for y in range(512): 
+        julia_set_array[x][y] = julia_set(x/256 - 1.5, y/256 - 1.0, c, n)
+
+ # Visualize the Julia set  
+plt.imshow(julia_set_array)  
+plt.show()
